@@ -9,16 +9,10 @@ namespace AccountsWebAuthentication.Helper
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
     public class CustomAuthorizeAttribute : AuthorizeAttribute
     {
-        private IFUser _iFUser;
-
-        public CustomAuthorizeAttribute()
-        {
-            _iFUser = new FUser();
-        }
-
         public string[] AllowedRoles { get; set; }
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
+            IFUser _iFUser = new FUser();
             string currentUserlogged = WindowsUser.Username;
             try
             {
